@@ -25,8 +25,15 @@ const inventory = [
  * Prints out the name of each item in the given array.
  * @param {Item[]} items - array of items
  */
-function logNames(items) {
-  // TODO: use `forEach`
+function logNames(items){
+
+  // for (let i = 0; i < inventory.length; i++) {
+  //   const element = items(i);
+  //   console.log(element.name)}  
+    
+items.forEach(function (i){
+  console.log(i.name);
+})
 }
 
 /**
@@ -34,7 +41,7 @@ function logNames(items) {
  * @returns {string[]} an array of item names in all uppercase
  */
 function getUppercaseNames(items) {
-  // TODO: use `map`
+  return items.map (function (food){return food.name.toUpperCase();})
 }
 
 /**
@@ -43,16 +50,20 @@ function getUppercaseNames(items) {
  * @returns {Item} - the item in `items` with the given `id`
  */
 function getItemById(items, id) {
-  // TODO: use `find`
+  return items.find (function (food){return food.id === id;});
 }
 
-/**
+/**   
  * @param {Item[]} items - array of items
  * @param {string} name - name of the item to find
- * @returns {number} the price of the item named `name` if found
+ * @returns {number} the price of the item named `name` if foundcc
  */
 function getItemPriceByName(items, name) {
-  // TODO: use a loop!
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+
+    if (item.name === name) {
+      return item.price}}
 }
 
 /**
@@ -69,15 +80,19 @@ function getItemsByCategory(items, category) {
  * @returns {number} the total quantity of all items
  */
 function countItems(items) {
-  // TODO: use `reduce`
-}
+  function countItems(items) {
+  return items.reduce((total, item) => {
+    return totalItems + item.count;
+  }, 0);}}
 
 /**
  * @param {Item[]} items - array of items
  * @returns {number} the cost of all given items
  */
 function getTotalPrice(items) {
-  // TODO: use `reduce`
+  return items.reduce ((total, item) => {
+    return total + item.price;
+  }), 0;
 }
 
 // === READ BUT DO NOT CHANGE THE CODE BELOW ===
@@ -88,16 +103,16 @@ logNames(inventory);
 console.log("Here are the names again in all uppercase:");
 console.log(getUppercaseNames(inventory));
 
+const itemId = prompt("Enter the ID of an item:", "1");
+console.log(`The item with id #${itemId} is:`);
+console.log(getItemById(inventory, +itemId));
+
 console.log(`In total, we have ${countItems(inventory)} items in stock.`);
 
 const totalCost = getTotalPrice(inventory);
 console.log(
   `It would cost $${totalCost?.toFixed(2)} to purchase everything in stock.`
 );
-
-const itemId = prompt("Enter the ID of an item:", "1");
-console.log(`The item with id #${itemId} is:`);
-console.log(getItemById(inventory, +itemId));
 
 const itemName = prompt("Enter the name of an item:", "apple");
 console.log(
